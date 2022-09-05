@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -18,5 +20,32 @@ func main() {
 	}
 	defer f.Close()
 
-	fmt.Println("I should be processing the input file now!")
+	//###########################################
+
+	output := ""
+	fileScanner := bufio.NewScanner(f)
+
+	//scan file line by line
+	for fileScanner.Scan() {
+		line := fileScanner.Text()
+
+		if len(line) == 0 {
+			continue
+		}
+
+		//handle 'name of sequence' cases
+		if line[0:1] == ">" {
+			if output != "" {
+				output = output + "\n"
+			}
+			output = output + strings.TrimSpace(line[1:]) + "	"
+
+			//handle 'sequence' cases
+		} else {
+			output = output + line
+		}
+	}
+	fmt.Println(output)
+
+	//###########################################
 }
