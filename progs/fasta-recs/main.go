@@ -20,7 +20,7 @@ func main() {
 	}
 	defer f.Close()
 
-	//##################implementation###############
+	//###########################################
 
 	output := ""
 	fileScanner := bufio.NewScanner(f)
@@ -47,4 +47,5 @@ func main() {
 	}
 	fmt.Println(output)
 
+	//###########################################
 }
